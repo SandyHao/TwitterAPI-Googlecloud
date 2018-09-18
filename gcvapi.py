@@ -1,3 +1,5 @@
+#the example get from Google Cloud Vision API
+#modified by Sichun Hao
 import io
 import os
 
