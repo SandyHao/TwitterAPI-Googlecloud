@@ -48,19 +48,20 @@ def get_all_tweets(screen_name):
         oldest = alltweets[-1].id - 1
         if(len(alltweets) > 15):
             break
-        print "...%s tweets downloaded so far" % (len(alltweets))
+        	#print ("...%s tweets downloaded so far" % (len(alltweets)))
 
-    file = open('tweet.json', 'w')
-    print "Writing tweet objects to JSON please wait..."
-    j=1
-    #picurl=[0 in range(len(alltweets))]
-    for status in alltweets:
-        json.dump(status._json, file, sort_keys=True, indent=4)
-        print(status.entities["media"][0]["media_url"])
-        image=io.imread(status.entities["media"][0]["media_url"])
-        io.imshow(image)
-        io.imsave('%d.jpg'%(j),image)
-        j=j+1
+	file = open('tweet.json', 'w')
+	print ("Writing tweet objects to JSON please wait...")
+	j=1
+        #picurl=[0 in range(len(alltweets))]
+	for status in alltweets:
+		json.dump(status._json, file, sort_keys=True, indent=4)
+		if 'media' in status.entities:
+			print(status.entities["media"][0]["media_url"])
+			image=io.imread(status.entities["media"][0]["media_url"])
+			io.imsave('%03d.jpg'%(j),image)
+			j=j+1
+		#else:
 
 if __name__ == '__main__':
     #pass in the username of the account you want to download
