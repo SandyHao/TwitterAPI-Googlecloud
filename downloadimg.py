@@ -8,10 +8,10 @@ import json
 
 
 # Twitter API credentials
-consumer_key = ""                                               #"Enter the consumer_key"
+consumer_key = ""                      #"Enter the consumer_key"
 consumer_secret = ""                   #"Enter the consumer_secret"
 access_key = ""                        #"Enter the access_key"
-access_secret = ""                          #"Enter the access_secret"
+access_secret = ""                     #"Enter the access_secret"
 from skimage import io
 
 def get_all_tweets(screen_name):
