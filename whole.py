@@ -7,10 +7,10 @@ import json
 import os,sys,ffmpeg
 #from django import Image
 # Twitter API credentials
-consumer_key = "YeVl6m88wogA0BD3JdYJ82SMN"                                               #"Enter the consumer_key"
-consumer_secret = "GG3nW2loOVBXT2q1DlRcyTdufEVzTQ4tz2DYJnd8URdcv6SfJV"                   #"Enter the consumer_secret"
-access_key = "1039021907595673600-ZlCCSvJGRJdjLvpKzisTa51rjhTxmO"                        #"Enter the access_key"
-access_secret = "f3SyAxg4kcL7KBG04cIW4Vv9pOecUPRkUjXGnbutqMvcR"                          #"Enter the access_secret"
+consumer_key = ""                      #"Enter the consumer_key"
+consumer_secret = ""                   #"Enter the consumer_secret"
+access_key = ""                        #"Enter the access_key"
+access_secret = ""                     #"Enter the access_secret"
 from skimage import io
 # Imports the Google Cloud client library
 from google.cloud import vision
