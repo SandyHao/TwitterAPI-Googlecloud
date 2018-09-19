@@ -1,11 +1,11 @@
 # TwitterAPI-Googlecloud
 #miniproject1
+
 before running:
 1. input twitter api keys in downloading.py & whole.py
 2. before using gcvapi.py & whole.py      
    run             export GOOGLE_APPLICATION_CREDENTIALS="/home/xxx/xxx/xxx.json"
    it is the route for google cloud vision api token
-
 
 contents: seperate the project into 3 section
 1. downloading.py_download images from twitter
