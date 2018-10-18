@@ -1,16 +1,21 @@
 #!/usr/bin/env python
 # encoding: utf-8
 # author SichunHao
-
+#export GOOGLE_APPLICATION_CREDENTIALS="/home/xxxxxxxx.json"
 import tweepy #https://github.com/tweepy/tweepy
 import json
 import os,sys,ffmpeg
+#import Image,ImageDraw,ImageFont
 #from django import Image
 # Twitter API credentials
-consumer_key = ""                      #"Enter the consumer_key"
+import PIL
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
+consumer_key = ""                                               #"Enter the consumer_key"
 consumer_secret = ""                   #"Enter the consumer_secret"
 access_key = ""                        #"Enter the access_key"
-access_secret = ""                     #"Enter the access_secret"
+access_secret = ""                          #"Enter the access_secret"
 from skimage import io
 # Imports the Google Cloud client library
 from google.cloud import vision
@@ -48,7 +53,7 @@ def get_all_tweets(screen_name):
         
 		#update the id of the oldest tweet less one
 		oldest = alltweets[-1].id - 1
-		if(len(alltweets) > 50):
+		if(len(alltweets) > 20):
 			break
 		#print ("...%s tweets downloaded so far" % (len(alltweets)))
 
@@ -74,10 +79,12 @@ if __name__ == '__main__':
 	import io
 	# Instantiates a client
 	client = vision.ImageAnnotatorClient()
-	for i in range(1,51):
+	for i in range(1,20):
 	# The name of the image file to annotate
 		file_name = os.path.join(os.path.dirname(__file__),'%03d.jpg'%(i))
-
+		font=ImageFont.truetype("/usr/share/fonts/truetype/Nakula/nakula.ttf", 30)#font
+		im=Image.open(file_name)#drawopen
+		
 		# Loads the image into memory
 		with io.open(file_name, 'rb') as image_file:
 			content = image_file.read()
@@ -87,12 +94,19 @@ if __name__ == '__main__':
 		# Performs label detection on the image file
 		response = client.label_detection(image=image)
 		labels = response.label_annotations
-
+		
+		
 		print('image%dlabels:'%i)
+		j=1
 		for label in labels:
+			j=j+1
 			print(label.description)
 			print(label.score)
-
+			draw=ImageDraw.Draw(im)
+			loca=j*30
+			draw.text((50,loca),label.description,(255,0,0),font=font)
+			draw=ImageDraw.Draw(im)
+			im.save('%03d.jpg'%(i))
 
 
 os.system("ffmpeg -r 1 -f image2 -i %3d.jpg -s 1200x800 models.mp4")
