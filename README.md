@@ -1,6 +1,10 @@
 # TwitterAPI-Googlecloud
 #miniproject1
 
+set up environment:
+1. register google API to get keys
+2. use "pip3 install google-cloud-vision" to install google cloud API
+
 before running:
 1. input twitter api keys in downloading.py & whole.py
 2. before using gcvapi.py & whole.py      
