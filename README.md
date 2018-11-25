@@ -2,13 +2,16 @@
 #miniproject1
 
 set up environment:
-1. register google API to get keys
-2. use "pip3 install google-cloud-vision" to install google cloud API
+1. register google API to get keys<br>
+2. use "pip3 install google-cloud-vision" to install google cloud API<br>
 
 before running:
-1. input twitter api keys in downloading.py & whole.py
+1. input twitter api keys in downloading.py & whole.py<br>
 2. before using gcvapi.py & whole.py      
-   run             export GOOGLE_APPLICATION_CREDENTIALS="/home/xxx/xxx/xxx.json"
+   if Linux run<br>
+   export GOOGLE_APPLICATION_CREDENTIALS="/home/xxx/xxx/xxx.json"<br>
+   else if Windows run<br>
+   set GOOGLE_APPLICATION_CREDENTIALS="/home/xxx/xxx/xxx.json"<br>
    it is the route for google cloud vision api token
 
 contents: seperate the project into 3 section
