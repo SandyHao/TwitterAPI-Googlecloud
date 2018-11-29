@@ -1,6 +1,6 @@
 # TwitterAPI-Googlecloud
-#miniproject1
-
+miniproject1
+-
 set up environment:
 1. register google API to get keys<br>
 2. use "pip3 install google-cloud-vision" to install google cloud API<br>
@@ -20,4 +20,7 @@ contents: seperate the project into 3 section
 3. gvcapi.py_using google cloud vision to figure out the items in video
 4. for all the function, run whole.py
 
-change the xxx to the name on twitter(the one you want to know)  "get_all_tweets("@xxx")"in main
+change the xxx to the name on twitter(the one you want to know)  "get_all_tweets("@xxx")"in main<br>
+
+Here is the result of a labeled image.()
+![](https://github.com/SandyHao/TwitterAPI-Googlecloud/blob/master/002.jpg)
