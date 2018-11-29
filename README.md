@@ -22,5 +22,5 @@ contents: seperate the project into 3 section
 
 change the xxx to the name on twitter(the one you want to know)  "get_all_tweets("@xxx")"in main<br>
 
-Here is the result of a labeled image.()
+Here is the result of a labeled image.
 ![](https://github.com/SandyHao/TwitterAPI-Googlecloud/blob/master/002.jpg)
