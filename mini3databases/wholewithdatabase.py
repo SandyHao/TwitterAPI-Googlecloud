@@ -21,7 +21,7 @@ from skimage import io
 from google.cloud import vision
 from google.cloud.vision import types
 
-def get_all_tweets(screen_name):
+def get_all_tweets(screen_name,tweetsnumber):
     #Twitter only allows access to a users most recent 3240 tweets with this method
 	#authorize twitter, initialize tweepy
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -30,7 +30,7 @@ def get_all_tweets(screen_name):
 	#initialize a list to hold all the tweepy Tweets
 	alltweets = []    
 	#make initial request for most recent tweets (200 is the maximum allowed count)
-	new_tweets = api.user_timeline(screen_name = screen_name,count=10)
+	new_tweets = api.user_timeline(screen_name = screen_name,count=tweetsnumber)
 	#save most recent tweets
 	alltweets.extend(new_tweets)
 	#save the id of the oldest tweet less one
@@ -43,7 +43,7 @@ def get_all_tweets(screen_name):
 		alltweets.extend(new_tweets)
 		#update the id of the oldest tweet less one
 		oldest = alltweets[-1].id - 1
-		if(len(alltweets) > 20):
+		if(len(alltweets) > tweetsnumber):
 			break
 		#print ("...%s tweets downloaded so far" % (len(alltweets)))
 
@@ -54,22 +54,29 @@ def get_all_tweets(screen_name):
 	for status in alltweets:
 		json.dump(status._json, file, sort_keys=True, indent=4)
 		if 'media' in status.entities:
-			print(status.entities["media"][0]["media_url"])#----------------------------------links--------------------
+			#---------------links-----------------------------------
+			print(status.entities["media"][0]["media_url"])
 			image=io.imread(status.entities["media"][0]["media_url"])
 			io.imsave('%03d.jpg'%(j),image)
 			j=j+1
 		#else:
-
+			#if fault exist, the instruction can be decided here
 
 		
 
 if __name__ == '__main__':
 	#pass in the username of the account you want to download
-	get_all_tweets("@AngelAlessandra")
+	username=input("please type in user's name:")
+	tweetname=input("please type in the name you want to search(eg.@AngelAlessandra):")
+	tweetsnumber=input("please input the number of tweets you want to know:")
+	tweetsnumber=int(tweetsnumber)
+	get_all_tweets(tweetname,tweetsnumber)
+
+
 	import io
 	# Instantiates a client
 	client = vision.ImageAnnotatorClient()
-	for i in range(1,25):
+	for i in range(1,tweetsnumber):
 	# The name of the image file to annotate
 		file_name = os.path.join(os.path.dirname(__file__),'%03d.jpg'%(i))
 		font=ImageFont.truetype("C:\Windows\Fonts\Arial.ttf", 30)#font
@@ -84,17 +91,34 @@ if __name__ == '__main__':
 		response = client.label_detection(image=image)
 		labels = response.label_annotations
 
-		#parameters need to be stored
-		username="Mac"
-		tweetname="sichun"
-		tweetsnumber=20
-		keyword1="model"
-		keyword2="beauty"
-		keyword3="tall"
-		keyword4="hair"
-		keyword5= "curly"
-		keyword6="children"
-		#link=""
+		print('image%dlabels:'%i)
+		j=1
+		for label in labels:
+			j=j+1
+			print(label.description)
+			print(label.score)
+			draw=ImageDraw.Draw(im)
+			loca=j*30
+			draw.text((50,loca),label.description,(255,0,0),font=font)
+			draw=ImageDraw.Draw(im)
+			im.save('%03d.jpg'%(i))
+
+
+	#parameters need to be stored
+	for i in len(labels):
+		if(i==0):
+			keyword1=labels[0]
+		elif(i==1):
+			keyword2=labels[1]
+		elif(i==2):
+			keyword3=labels[2]
+		elif(i==3):
+			keyword4=labels[3]
+		elif(i==4):
+			keyword5=labels[4]	
+		elif(i==5):
+			keyword6=labels[5]
+	
 		#mongodb
 		myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 		mydb = myclient["mini3mongo"]
@@ -114,19 +138,5 @@ if __name__ == '__main__':
 		except:
 			db.rollback()
 		db.close()
-
-
-		print('image%dlabels:'%i)
-		j=1
-		for label in labels:
-			j=j+1
-			print(label.description)
-			print(label.score)
-			draw=ImageDraw.Draw(im)
-			loca=j*30
-			draw.text((50,loca),label.description,(255,0,0),font=font)
-			draw=ImageDraw.Draw(im)
-			im.save('%03d.jpg'%(i))
-
 
 os.system("ffmpeg -r 1 -f image2 -i %3d.jpg -s 1200x800 models.mp4")
