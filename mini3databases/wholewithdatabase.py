@@ -128,7 +128,7 @@ if __name__ == '__main__':
 				"keyword5":keyword5,"keyword6":keyword6}
 		x=mycol.insert_one(record)
 		#mysql  
-		db= pymysql.connect("localhost","root","Lianzhiji##4","601mini3")  
+		db= pymysql.connect("localhost","root",passwordhere,"601mini3")  
 		cursor = db.cursor()  
 		sql="INSERT INTO tweetsinquiry value(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 		try:
