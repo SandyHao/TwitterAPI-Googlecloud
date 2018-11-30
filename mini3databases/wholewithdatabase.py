@@ -147,6 +147,15 @@ if __name__ == '__main__':
 				print(row)
 		except:
 			print("unable to fetch")
+
+		#------------------------------------------------------------------------
+		try:
+			highest = select 列名, count(*) from 表名 group by 列名 order by count(*) desc
+			for row in highest:
+				print(row)
+		except:
+			print("unable to fetch")
+		#------------------------------------------------------------------------
 		db.close()
 
 os.system("ffmpeg -r 1 -f image2 -i %3d.jpg -s 1200x800 models.mp4")
