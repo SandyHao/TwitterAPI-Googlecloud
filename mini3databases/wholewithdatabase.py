@@ -127,6 +127,10 @@ if __name__ == '__main__':
 				"keyword1":keyword1,"keyword2":keyword2,"keyword3":keyword3,"keyword4":keyword4,
 				"keyword5":keyword5,"keyword6":keyword6}
 		x=mycol.insert_one(record)
+		myquery = input("please input the keywords you want to search in database")
+		mydoc = mycol.find(myquery)
+		for x in mydoc:
+			  print(x)
 		#mysql  
 		db= pymysql.connect("localhost","root",passwordhere,"601mini3")  
 		cursor = db.cursor()  
