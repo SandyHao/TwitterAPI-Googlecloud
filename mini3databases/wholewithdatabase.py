@@ -141,6 +141,12 @@ if __name__ == '__main__':
 			db.commit()
 		except:
 			db.rollback()
+		try:
+			results = cursor.fetchall(myquery)
+			for row in results:
+				print(row)
+		except:
+			print("unable to fetch")
 		db.close()
 
 os.system("ffmpeg -r 1 -f image2 -i %3d.jpg -s 1200x800 models.mp4")
