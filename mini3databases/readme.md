@@ -6,6 +6,8 @@ Installation MySQL
 
 Connect to MySQL
 -
+		db= pymysql.connect("localhost","root",passwordhere,"601mini3")  
+		cursor = db.cursor()  
 
 Installation MongoDB
 -
